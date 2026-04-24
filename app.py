@@ -15,7 +15,8 @@ else:
     st.error("❌ La clé API est manquante. Va dans Settings > Secrets sur Streamlit et ajoute : GOOGLE_API_KEY = 'TA_CLE'")
     st.stop()
 
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
+
 
 if 'historique' not in st.session_state:
     st.session_state['historique'] = []

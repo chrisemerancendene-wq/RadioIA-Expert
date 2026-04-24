@@ -76,4 +76,4 @@ if st.session_state['historique']:
     st.subheader("📂 Registre des examens - Hôpital Jamot")
     df = pd.DataFrame(st.session_state['historique'])
     st.dataframe(df, use_container_width=True)
-    st.download_button("📥 Exporter pour le Master (CSV)", df.to_csv(index=False), "data_recherche_jamot.csv"
+    st.download_button("📥 Exporter pour le Master (CSV)", df.to_csv(index=False), "data_recherche_jamot.csv")

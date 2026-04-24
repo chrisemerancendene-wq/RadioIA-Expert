@@ -8,13 +8,17 @@ from datetime import datetime
 st.set_page_config(page_title="RadioIA Expert - Jamot", layout="wide")
 
 # --- CONFIGURATION DE L'API (VIA SECRETS) ---
-# Cette partie cherche la clé que tu as mise dans "Manage App > Settings > Secrets"
+# --- CONFIGURATION DE L'API ---
 if "GOOGLE_API_KEY" in st.secrets:
     API_KEY = st.secrets["GOOGLE_API_KEY"]
-    genai.configure(api_key=API_KEY)
+    # On force la configuration sur la version stable
+    genai.configure(api_key=API_KEY, transport='grpc') 
 else:
-    st.error("❌ La clé API est manquante. Va dans Settings > Secrets sur Streamlit et ajoute : GOOGLE_API_KEY = 'TA_CLE'")
+    st.error("❌ Clé API manquante dans les Secrets.")
     st.stop()
+
+# On utilise le nom complet du modèle pour éviter toute confusion
+model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
 
 # Initialisation du modèle (Syntaxe robuste pour éviter l'erreur 404)
 model = genai.GenerativeModel('gemini-1.5-flash')

@@ -10,12 +10,14 @@ st.set_page_config(page_title="RadioIA Expert - Jamot", layout="wide")
 # --- CONFIGURATION DE L'API (VIA SECRETS) ---
 # --- CONFIGURATION DE L'API ---
 if "GOOGLE_API_KEY" in st.secrets:
-    API_KEY = st.secrets["GOOGLE_API_KEY"]
-    # On force la configuration sur la version stable
-    genai.configure(api_key=API_KEY, transport='grpc') 
+    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 else:
-    st.error("❌ Clé API manquante dans les Secrets.")
+    st.error("Clé API manquante")
     st.stop()
+
+# On utilise cette syntaxe précise
+model = genai.GenerativeModel('gemini-1.5-flash')
+
 
 # On utilise le nom complet du modèle pour éviter toute confusion
 model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
